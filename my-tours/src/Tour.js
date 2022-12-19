@@ -1,5 +1,10 @@
-const Tour = ({ tour }) => {
+import { useState } from "react";
+
+const Tour = ({ tour, removeTour }) => {
     const { id, picture, name, dob, email, phone } = tour;
+    const [readMore, setReadMore] = useState(false)
+
+    const dummyInfo = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum asperiores esse soluta veniam tenetur, voluptatibus excepturi delectus ipsam eaque sit."
 
     return (
         <article className="single-tour">
@@ -13,9 +18,15 @@ const Tour = ({ tour }) => {
 
                 <p>Email: {email}</p>
                 <p>Phone: {phone}</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis quam laboriosam assumenda expedita, mollitia velit.</p>
 
-                <button className="delete-btn">not interested</button>
+                <div className="more-info">
+                    {readMore ? dummyInfo : dummyInfo.substr(0, 80)}...
+                    <button onClick={() => setReadMore(!readMore)}>
+                        {readMore ? "show less" : "read more"}
+                    </button>
+                </div>
+
+                <button className="delete-btn" onClick={() => removeTour(id)} >not interested</button>
             </footer>
         </article>
     );
