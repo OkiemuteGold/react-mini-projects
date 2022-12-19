@@ -6,31 +6,40 @@ const Review = () => {
     let [index, setIndex] = useState(0);
     const { name, job, image, text } = reviews[index];
 
-    const checkIndex = () => {
+    const checkIndex = (index) => {
         if (index < 0) {
-            setIndex(reviews.length - 1);
+            return reviews.length - 1
         }
 
         if (index > reviews.length - 1) {
-            setIndex(0);
+            return 0
         }
+
         // console.log(index);
+        return index;
     }
 
     const previousPerson = () => {
-        setIndex(index -= 1);
-        checkIndex();
+        setIndex(index => {
+            let newIndex = index - 1;
+            return checkIndex(newIndex);
+        });
     }
 
     const nextPerson = () => {
-        setIndex(index += 1);
-        checkIndex();
+        let newIndex = index + 1;
+        setIndex(checkIndex(newIndex));
     }
 
     const randomPerson = () => {
-        const randomNumber = Math.random() * reviews.length;
-        // console.log(randomNumber, Math.floor(randomNumber));
-        setIndex(Math.floor(randomNumber));
+        let randomNumber = Math.floor(Math.random() * reviews.length);
+
+        if (randomNumber === index) {
+            randomNumber = index + 1;
+        }
+        // console.log(randomNumber, index);
+
+        setIndex(checkIndex(randomNumber));
     }
 
     return (

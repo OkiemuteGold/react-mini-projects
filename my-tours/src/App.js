@@ -27,13 +27,13 @@ function App() {
             const result = await response.json();
             const tours = result.results;
 
-            console.log(tours);
+            // console.log(tours);
 
             setLoading(false);
             setTours(tours);
         } catch (error) {
             setLoading(false);
-            console.log(error);
+            console.error(error);
         }
     }
 
