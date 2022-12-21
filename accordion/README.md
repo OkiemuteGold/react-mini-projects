@@ -69,6 +69,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+#### Idea
+
+[uidesigndaily](https://uidesigndaily.com/posts/sketch-accordion-website-day-1175)
+
+![](./idea.png);
+
 #### React Icons
 
 [react icons](https://react-icons.github.io/react-icons/)
