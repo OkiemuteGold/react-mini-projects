@@ -67,6 +67,7 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
+  overflow-x: hidden;
 }
 ul {
   list-style-type: none;
@@ -125,6 +126,7 @@ p {
 /*  global classes */
 
 /* section */
+
 .section {
   width: 90vw;
   margin: 0 auto;
@@ -191,7 +193,17 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
+
+.question header.active h4 {
+  color: var(--clr-red-special);
+}
+
+.question header:not(.active):hover h4 {
+  color: var(--clr-grey-4);
+}
+
 .question header h4 {
   margin-bottom: 0;
 }
