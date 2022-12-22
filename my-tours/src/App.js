@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Loading from './Loading';
 import Tours from './Tours';
-// import './App.css';
 
 // const url = "https://course-api.netlify.app/api/react-tours-project";
 
