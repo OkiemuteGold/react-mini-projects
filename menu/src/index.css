@@ -180,7 +180,7 @@ Menu
 }
 .section-center {
   width: 90vw;
-  margin: 0 auto;
+  margin: 1.25rem auto 0;
   max-width: 1170px;
   display: grid;
   gap: 3rem 2rem;
@@ -191,18 +191,30 @@ Menu
   gap: 1rem 2rem;
   max-width: 25rem;
 }
+
+.photo-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
 .photo {
   object-fit: cover;
   height: 200px;
   width: 100%;
-  border: 0.25rem solid var(--clr-gold);
-  border-radius: var(--radius);
+  /* border: 0.125rem solid var(--clr-gold); */
   display: block;
+  transition: transform 0.4s ease;
 }
+
+.menu-item:hover .photo {
+  transform: scale(1.085);
+}
+
 .item-info header {
   display: flex;
   justify-content: space-between;
   border-bottom: 0.5px dotted var(--clr-grey-5);
+  margin-top: 0.5rem;
 }
 .item-info h4 {
   margin-bottom: 0.5rem;
