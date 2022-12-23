@@ -74,3 +74,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 `className={`filter-btn ${active === category ? "active" : ""}`}`
 
 `className={"filter-btn " + (active === category ? "active" : "")}`
+
+#### `classnames utility by JedWatson on GitHub`
+
+render () {
+var btnClass = classNames({
+'btn': true,
+'btn-pressed': this.state.isPressed,
+'btn-over': !this.state.isPressed && this.state.isHovered
+});
+
+    return <button className={btnClass}>I'm a button!</button>;
+
+}
