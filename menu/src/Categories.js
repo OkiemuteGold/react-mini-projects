@@ -1,11 +1,18 @@
-// import { useState } from "react";
-
-const Categories = ({ filterItems }) => {
-    // const [isActive, setIsActive] = useState(false);
-
-    return <div className="btn-container">
-        <button className="filter-btn" onClick={() => filterItems('breakfast')} >Breakfast</button>
-    </div>
+const Categories = ({ allCategories, filterItems }) => {
+    return (
+        <div className="btn-container">
+            {allCategories.map((category, index) => (
+                <button
+                    type="button"
+                    className="filter-btn"
+                    key={index}
+                    onClick={() => filterItems(category)}
+                >
+                    {category}
+                </button>
+            ))}
+        </div>
+    );
 };
 
 export default Categories;

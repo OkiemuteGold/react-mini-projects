@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### How to dynamically add a class to manual class names?
+
+`className={`filter-btn ${active === category ? "active" : ""}`}`
+
+`className={"filter-btn " + (active === category ? "active" : "")}`
