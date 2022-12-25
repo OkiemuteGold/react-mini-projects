@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Loading from "./Loading"
 import JobInfo from "./JobInfo";
+import JobTabs from './JobTabs';
 
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
@@ -17,6 +18,10 @@ function App() {
 
         setJobs(allJobs)
         setLoading(false)
+    }
+
+    const setCurrentValue = (index) => {
+        setValue(index);
     }
 
     useEffect(() => {
@@ -40,24 +45,10 @@ function App() {
 
             <div className="jobs-center">
                 {/* btn container */}
-                <div className="btn-container">
-                    {
-                        jobs.map((item, index) => {
-                            return (
-                                <button
-                                    key={item.id}
-                                    onClick={() => setValue(index)}
-                                    className={`job-btn ${index === value && 'active-btn'}`}
-                                >
-                                    {item.company}
-                                </button>
-                            )
-                        })
-                    }
-                </div>
+                <JobTabs jobs={jobs} value={value} setCurrentValue={setCurrentValue} />
 
                 {/* job info */}
-                <JobInfo infos={singleJob} />
+                <JobInfo jobInfo={singleJob} />
             </div>
 
             <button type="button" className="btn">

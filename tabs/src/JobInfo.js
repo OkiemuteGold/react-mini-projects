@@ -1,7 +1,7 @@
 import { FaAngleDoubleRight } from 'react-icons/fa'
 
-const JobInfo = ({ infos }) => {
-    const { company, dates, duties, title } = infos
+const JobInfo = ({ jobInfo }) => {
+    const { company, dates, duties, title } = jobInfo
 
     return (
         <article className="job-info">
