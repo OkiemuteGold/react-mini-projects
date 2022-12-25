@@ -12,14 +12,13 @@ function App() {
 
     useEffect(() => {
         const lastIndex = people.length - 1;
-        const firstIndex = 0;
 
         if (index < 0) {
             setIndex(lastIndex);
         }
 
-        if (index > people.length - 1) {
-            setIndex(firstIndex);
+        if (index > lastIndex) {
+            setIndex(0);
         }
     }, [index, people]);
 
