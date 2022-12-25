@@ -10,6 +10,19 @@ function App() {
         setIndex(index);
     }
 
+    useEffect(() => {
+        const lastIndex = people.length - 1;
+        const firstIndex = 0;
+
+        if (index < 0) {
+            setIndex(lastIndex);
+        }
+
+        if (index > people.length - 1) {
+            setIndex(firstIndex);
+        }
+    }, [index, people]);
+
     return (
         <section className="section">
             <div className="title">
