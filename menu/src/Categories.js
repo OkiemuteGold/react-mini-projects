@@ -10,16 +10,18 @@ const Categories = ({ allCategories, filterItems }) => {
 
     return (
         <div className="btn-container">
-            {allCategories.map((category, index) => (
-                <button
-                    type="button"
-                    className={`filter-btn ${active === category ? "active" : ""}`}
-                    key={index}
-                    onClick={() => showCategory(category)}
-                >
-                    {category}
-                </button>
-            ))}
+            {
+                allCategories.map((category, index) => (
+                    <button
+                        type="button"
+                        className={`filter-btn ${active === category ? "active" : ""}`}
+                        key={index}
+                        onClick={() => showCategory(category)}
+                    >
+                        {category}
+                    </button>
+                ))
+            }
         </div>
     );
 };
