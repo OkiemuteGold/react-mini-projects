@@ -3,17 +3,12 @@ import data from './data';
 import Review from './Review';
 
 function App() {
-    const [people, setPeople] = useState(data)
+    const [people] = useState(data)
     const [index, setIndex] = useState(0)
 
-    // const setCurrentReview = () => {
-    //     const review = people[index]
-    //     setPeople()
-    // }
-
-    // useEffect(() => {
-    //     setCurrentReview();
-    // }, []);
+    const setCurrentReview = (index) => {
+        setIndex(index);
+    }
 
     return (
         <section className="section">
@@ -23,7 +18,7 @@ function App() {
                 </h2>
             </div>
 
-            <Review people={people} />
+            <Review people={people} index={index} setCurrentReview={setCurrentReview} />
         </section>
     )
 }
