@@ -10,10 +10,24 @@ const SingleColor = ({ color, index }) => {
     // const hexColor = rgbToHex(...rgb);
     const hexColor = "#" + hex;
 
+    useEffect(() => {
+        const alertTimeout = setTimeout(() => {
+            setAlert(false);
+        }, 2500);
+
+        return () => {
+            clearTimeout(alertTimeout);
+        }
+    }, [alert])
+
     return (
         <article
             className={`color ${index > 10 && "color-light"}`}
             style={{ backgroundColor: background }}
+            onClick={() => {
+                navigator.clipboard.writeText(hexColor);
+                setAlert(true);
+            }}
         >
             <p className="percent-value">{weight}%</p>
 
