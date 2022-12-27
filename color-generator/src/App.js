@@ -6,7 +6,9 @@ function App() {
     const [color, setColor] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [colorList, setColorList] = useState([]);
+
+    const defaultColor = new Values("#f15025").all(10);
+    const [colorList, setColorList] = useState(defaultColor);
 
     const submitColor = (e) => {
         e.preventDefault();
@@ -50,7 +52,9 @@ function App() {
                         Submit
                     </button>
                 </form>
+            </section>
 
+            <section className="container">
                 {
                     error && <p>{errorMessage}</p>
                 }
