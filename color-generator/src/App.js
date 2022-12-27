@@ -51,9 +51,9 @@ function App() {
                     </button>
                 </form>
 
-                <p>
-                    {error && errorMessage}
-                </p>
+                {
+                    error && <p>{errorMessage}</p>
+                }
             </section>
 
             <section className="colors">
@@ -61,7 +61,7 @@ function App() {
                     colorList.map((color, index) => {
                         console.log(color);
 
-                        return <SingleColor color={color} key={index} />
+                        return <SingleColor color={color} key={index} index={index} />
                     })
                 }
             </section>

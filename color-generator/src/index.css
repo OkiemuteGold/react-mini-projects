@@ -195,10 +195,13 @@ input.error {
   text-transform: none;
 }
 .percent-value {
-  margin-bottom: 0;
+  margin-bottom: 0.25rem;
   color: var(--clr-grey-1);
+  opacity: 0.85;
 }
 .color-value {
+  font-size: 1.25rem;
+  letter-spacing: var(--spacing);
   color: var(--clr-grey-1);
   margin-bottom: 0;
 }
