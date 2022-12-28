@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import rgbToHex from './utilities'
 
-const SingleColor = ({ color, index }) => {
+const SingleColor = ({ color, index, length }) => {
     const { rgb, weight, hex } = color;
     const [alert, setAlert] = useState(false);
     const rgbCode = rgb.join(",");
@@ -9,6 +9,7 @@ const SingleColor = ({ color, index }) => {
 
     // const hexColor = rgbToHex(...rgb);
     const hexColor = "#" + hex;
+    const limit = Math.round(length / 2);
 
     useEffect(() => {
         const alertTimeout = setTimeout(() => {
@@ -22,7 +23,7 @@ const SingleColor = ({ color, index }) => {
 
     return (
         <article
-            className={`color ${index > 10 && "color-light"}`}
+            className={`color ${index >= limit && "color-light"} ${index === limit - 1 && "bg-colored"}`}
             style={{ backgroundColor: background }}
             onClick={() => {
                 navigator.clipboard.writeText(hexColor);

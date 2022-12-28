@@ -64,6 +64,7 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
+  padding-bottom: 3.125rem;
 }
 ul {
   list-style-type: none;
@@ -152,6 +153,10 @@ Color Generator
   margin-right: 2rem;
 }
 
+form {
+  position: relative;
+}
+
 input {
   border-color: transparent;
   padding: 0.5rem 1rem;
@@ -159,6 +164,21 @@ input {
   border-top-left-radius: var(--radius);
   border-bottom-left-radius: var(--radius);
 }
+
+select {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 6.25rem;
+  width: max-content;
+  height: 90%;
+  margin: auto;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  padding: 0.375rem 0;
+}
+
 .btn {
   background: var(--clr-primary-5);
   padding: 0.5rem 1rem;
@@ -174,6 +194,7 @@ input {
   .container h3 {
     font-size: 1rem;
   }
+  select,
   input,
   .btn {
     font-size: 0.85rem;
@@ -188,6 +209,24 @@ input.error {
   grid-template-columns: repeat(auto-fit, minmax(223.33px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(96px, 1fr));
 }
+
+article {
+  position: relative;
+  min-height: 5rem;
+  border: 1px solid var(--light-shadow);
+}
+
+article p {
+  color: var(--clr-grey-1);
+}
+
+.color.bg-colored {
+  transform: scale(1.075);
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-grey-6);
+  z-index: 1;
+}
+
 .color {
   padding: 1rem 2rem;
   cursor: pointer;
@@ -195,25 +234,24 @@ input.error {
   text-transform: none;
 }
 .percent-value {
-  margin-bottom: 0.25rem;
-  color: var(--clr-grey-1);
+  margin-bottom: 0;
   opacity: 0.85;
 }
 .color-value {
   font-size: 1.25rem;
   letter-spacing: var(--spacing);
-  color: var(--clr-grey-1);
   margin-bottom: 0;
 }
-.color-light .color-value {
-  color: var(--clr-white);
-}
-.color-light .percent-value {
+
+.color-light p {
   color: var(--clr-white);
 }
 
 .alert {
+  font-size: 0.75rem;
   text-transform: uppercase;
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
+  position: absolute;
+  bottom: -1rem;
+  right: 0.5rem;
+  opacity: 0.85;
 }
