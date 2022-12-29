@@ -6,7 +6,10 @@ function App() {
     const [name, setName] = useState("");
     const [list, setList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
-    const [editID, setEditID] = useState(null);
+    const [currentEditItem, setCurrentEditItem] = useState({
+        id: null,
+        title: "",
+    });
     const [alert, setAlert] = useState({
         show: false,
         type: "",
@@ -20,13 +23,28 @@ function App() {
         });
     }
 
+    const updateEditItem = (id = null, title = "") => {
+        setCurrentEditItem({ id, title });
+    }
+
     const submitForm = (e) => {
         e.preventDefault();
 
         if (!name) {
             showAlert(true, "danger", "Please enter an item");
         } else if (name && isEditing) {
-            setIsEditing(true);
+            const newList = list.map(item => {
+                if (item.id === currentEditItem.id) {
+                    return { ...item, title: name };
+                }
+                return item;
+            });
+
+            setList(newList);
+            setIsEditing(false);
+            showAlert(true, "success", `${currentEditItem.title} changed to ${name}`);
+            setName("");
+            updateEditItem();
         } else {
             const newItem = {
                 id: "item" + new Date().getTime().toString(),
@@ -39,26 +57,33 @@ function App() {
         }
     };
 
-    const deleteItem = (itemId, title) => {
-        const newList = list.filter(item => {
-            return item.id !== itemId;
-        });
+    const deleteItem = (id, title) => {
+        const newList = list.filter(item => item.id !== id);
 
-        showAlert(true, "danger", title + " removed from list");
         setList(newList);
+        showAlert(true, "danger", title + " removed from list");
+    }
+
+    const editItem = (id, title) => {
+        console.log(id, title);
+        const specificItem = list.find(item => item.id === id)
+
+        setIsEditing(true);
+        updateEditItem(id, title);
+        setName(specificItem.title);
     }
 
     const clearList = () => {
-        showAlert(true, "danger", "list emptied");
         setList([]);
+        showAlert(true, "danger", "list emptied");
     }
 
     return (
         <section className="section-center">
             <form className="grocery-form" onSubmit={submitForm}>
-                {
-                    alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />
-                }
+                {alert.show && (
+                    <Alert {...alert} removeAlert={showAlert} list={list} />
+                )}
 
                 <h3>Grocery list</h3>
 
@@ -77,14 +102,18 @@ function App() {
                 </div>
             </form>
 
-            {
-                list.length > 0 && (
-                    <div className="grocery-container">
-                        <List groceryItems={list} deleteItem={deleteItem} />
-                        <button className="clear-btn" onClick={clearList} >Clear items</button>
-                    </div>
-                )
-            }
+            {list.length > 0 && (
+                <div className="grocery-container">
+                    <List
+                        groceryItems={list}
+                        deleteItem={deleteItem}
+                        editItem={editItem}
+                    />
+                    <button className="clear-btn" onClick={clearList}>
+                        Clear items
+                    </button>
+                </div>
+            )}
         </section>
     );
 }

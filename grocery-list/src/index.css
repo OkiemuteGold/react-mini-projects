@@ -237,6 +237,7 @@ Grocery List
   content: var(--clr-primary-5);
   transition: var(--transition);
   font-size: 0.85rem;
+  margin-left: -0.5rem;
 }
 .submit-btn:hover {
   background: var(--clr-primary-5);

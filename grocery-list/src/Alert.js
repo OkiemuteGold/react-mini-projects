@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 const Alert = ({ type, message, removeAlert, list }) => {
     useEffect(() => {
@@ -9,7 +9,7 @@ const Alert = ({ type, message, removeAlert, list }) => {
         return () => {
             clearTimeout(alert);
         };
-    }, [list])
+    }, [list]);
 
     return <p className={`alert alert-${type}`}>{message}</p>;
 };
