@@ -25,12 +25,7 @@ function App() {
 
         if (!name) {
             showAlert(true, "danger", "Please enter an item");
-
-            setTimeout(() => {
-                showAlert(false);
-            }, 2500);
         } else if (name && isEditing) {
-            // handle edit
             setIsEditing(true);
         } else {
             const newItem = {
@@ -40,12 +35,7 @@ function App() {
 
             setList([...list, newItem]);
             setName("");
-
             showAlert(true, "success", newItem.title + " was added to your list");
-
-            setTimeout(() => {
-                showAlert(false);
-            }, 2500);
         }
     };
 
@@ -61,7 +51,7 @@ function App() {
         <section className="section-center">
             <form className="grocery-form" onSubmit={submitForm}>
                 {
-                    alert.show && <Alert {...alert} />
+                    alert.show && <Alert {...alert} removeAlert={showAlert} />
                 }
 
                 <h3>Grocery list</h3>
