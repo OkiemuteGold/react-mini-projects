@@ -96,6 +96,7 @@ p {
   margin-bottom: 1.25rem;
   color: var(--clr-grey-5);
 }
+
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 4rem;
@@ -119,6 +120,7 @@ p {
     line-height: 1;
   }
 }
+
 .btn {
   text-transform: uppercase;
   background: transparent;
@@ -148,11 +150,13 @@ p {
   max-width: 35rem;
   margin-top: 8rem;
 }
+
 @media screen and (min-width: 992px) {
   .section-center {
     width: 95vw;
   }
 }
+
 main {
   min-height: 100vh;
   display: grid;
@@ -225,7 +229,7 @@ Grocery List
 .submit-btn {
   background: var(--clr-primary-8);
   border-color: transparent;
-  flex: 0 0 5rem;
+  flex: 0 0 auto;
   display: grid;
   align-items: center;
   padding: 0.5rem;
@@ -238,6 +242,7 @@ Grocery List
   transition: var(--transition);
   font-size: 0.85rem;
   margin-left: -0.5rem;
+  min-width: 90px;
 }
 .submit-btn:hover {
   background: var(--clr-primary-5);
@@ -245,6 +250,7 @@ Grocery List
 }
 
 .grocery-container {
+  position: relative;
   margin-top: 1.5rem;
 }
 
@@ -284,7 +290,7 @@ Grocery List
   background: transparent;
   border-color: transparent;
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   margin: 0 0.15rem;
   transition: var(--transition);
 }
@@ -318,4 +324,72 @@ Grocery List
 }
 .clear-btn:hover {
   color: var(--clr-red-dark);
+}
+
+.delete-modal,
+.delete-modal .inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding: 1rem 2rem;
+  background: hsla(206, 33%, 96%, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.delete-modal .inner {
+  flex-direction: column;
+  -ms-flex-direction: column;
+}
+
+.delete-modal .inner .alert {
+  font-weight: 600;
+  height: initial;
+}
+
+.delete-modal .inner .btn {
+  font-size: 0.75rem;
+  background: var(--clr-green-light);
+  border: 1px solid transparent;
+}
+
+.delete-modal .inner .btn.cancel {
+  background: transparent;
+  color: var(--clr-red-dark);
+  margin-right: 0.65rem;
+}
+
+.delete-modal .inner .btn:hover {
+  background: transparent;
+  border-color: var(--clr-grey-8);
+}
+
+.delete-modal .inner .btn.accept:hover {
+  color: var(--clr-green-dark);
+}
+
+@media screen and (max-width: 426px) {
+  .form-control {
+    flex-direction: column;
+    -ms-flex-direction: column;
+  }
+
+  .grocery-input,
+  .submit-btn {
+    border-radius: var(--radius);
+  }
+
+  .submit-btn {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
 }

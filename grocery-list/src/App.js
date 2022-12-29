@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Alert from "./Alert";
 import List from "./List";
+import DeleteModal from "./DeleteModal";
 
 function App() {
     const [name, setName] = useState("");
@@ -15,7 +16,9 @@ function App() {
         type: "",
         message: ""
     });
+    const [isModalShown, setIsModalShown] = useState(false);
 
+    // ---- function to show alert
     const showAlert = (show = false, type = "", message = "") => {
         // in es6 if parameter and property used is same, you can simply use one. i.e show: show, or show,
         setAlert({
@@ -23,10 +26,23 @@ function App() {
         });
     }
 
+    // ---- trap id and title of current item to edit
     const updateEditItem = (id = null, title = "") => {
         setCurrentEditItem({ id, title });
     }
 
+    // ---- close modal
+    const closeDeleteModal = () => {
+        setIsModalShown(false);
+    }
+
+    // ---- show modal and trap id and title of current item
+    const showDeleteModal = (id, title) => {
+        setCurrentEditItem({ id, title });
+        setIsModalShown(true);
+    }
+
+    // ---- handle submit
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -57,15 +73,18 @@ function App() {
         }
     };
 
-    const deleteItem = (id, title) => {
-        const newList = list.filter(item => item.id !== id);
-
+    // ---- delete item
+    const deleteItem = () => {
+        const newList = list.filter(item => item.id !== currentEditItem.id);
         setList(newList);
-        showAlert(true, "danger", title + " removed from list");
+
+        closeDeleteModal();
+        showAlert(true, "success", currentEditItem.title + " removed from list");
     }
 
+    // ---- edit item
     const editItem = (id, title) => {
-        console.log(id, title);
+        // console.log(id, title);
         const specificItem = list.find(item => item.id === id)
 
         setIsEditing(true);
@@ -73,6 +92,7 @@ function App() {
         setName(specificItem.title);
     }
 
+    // ---- clear list
     const clearList = () => {
         setList([]);
         showAlert(true, "danger", "list emptied");
@@ -106,12 +126,20 @@ function App() {
                 <div className="grocery-container">
                     <List
                         groceryItems={list}
-                        deleteItem={deleteItem}
+                        showDeleteModal={showDeleteModal}
                         editItem={editItem}
                     />
                     <button className="clear-btn" onClick={clearList}>
                         Clear items
                     </button>
+
+                    {isModalShown && (
+                        <DeleteModal
+                            title={currentEditItem.title}
+                            deleteItem={deleteItem}
+                            closeDeleteModal={closeDeleteModal}
+                        />
+                    )}
                 </div>
             )}
         </section>
