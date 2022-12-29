@@ -25,6 +25,7 @@ function App() {
 
     useEffect(() => {
         variations();
+        // eslint-disable-next-line
     }, []);
 
     const submitColor = (e) => {

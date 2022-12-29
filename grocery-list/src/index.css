@@ -201,8 +201,8 @@ Grocery List
   display: flex;
   justify-content: center;
 }
-.grocery {
-  padding: 0.25rem;
+.grocery-input {
+  padding: 0.5rem;
   padding-left: 1rem;
   background: var(--clr-grey-10);
   border-top-left-radius: var(--radius);
@@ -211,10 +211,16 @@ Grocery List
   font-size: 1rem;
   flex: 1 0 auto;
   color: var(--clr-grey-5);
+  outline-color: var(--clr-grey-9);
 }
-.grocery::placeholder {
+.grocery-input::placeholder {
   font-family: var(--ff-secondary);
   color: var(--clr-grey-5);
+}
+.grocery-input:focus,
+.grocery-input:active {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .submit-btn {
   background: var(--clr-primary-8);
@@ -222,7 +228,7 @@ Grocery List
   flex: 0 0 5rem;
   display: grid;
   align-items: center;
-  padding: 0.25rem;
+  padding: 0.5rem;
   text-transform: capitalize;
   letter-spacing: 2px;
   border-top-right-radius: var(--radius);
@@ -241,15 +247,21 @@ Grocery List
   margin-top: 2rem;
 }
 
+.grocery-list {
+  margin-top: 1rem;
+}
+
 .grocery-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
   transition: var(--transition);
   padding: 0.25rem 1rem;
   border-radius: var(--radius);
   text-transform: capitalize;
+}
+.grocery-item:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 .grocery-item:hover {
   color: var(--clr-grey-5);
