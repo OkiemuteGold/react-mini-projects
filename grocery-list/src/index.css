@@ -247,6 +247,12 @@ Grocery List
   margin-top: 1.5rem;
 }
 
+.grocery-list {
+  border: 1px solid var(--clr-grey-10);
+  border-radius: var(--radius);
+  padding: 0.125rem;
+}
+
 .grocery-item {
   display: flex;
   align-items: center;

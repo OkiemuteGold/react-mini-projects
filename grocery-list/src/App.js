@@ -34,24 +34,30 @@ function App() {
             };
 
             setList([...list, newItem]);
-            setName("");
             showAlert(true, "success", newItem.title + " was added to your list");
+            setName("");
         }
     };
 
-    // const deleteItem = (itemId) => {
-    //     const newList = list.filter(item => {
-    //         return item.id !== itemId;
-    //     });
+    const deleteItem = (itemId, title) => {
+        const newList = list.filter(item => {
+            return item.id !== itemId;
+        });
 
-    //     setList(newList);
-    // }
+        showAlert(true, "danger", title + " removed from list");
+        setList(newList);
+    }
+
+    const clearList = () => {
+        showAlert(true, "danger", "list emptied");
+        setList([]);
+    }
 
     return (
         <section className="section-center">
             <form className="grocery-form" onSubmit={submitForm}>
                 {
-                    alert.show && <Alert {...alert} removeAlert={showAlert} />
+                    alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />
                 }
 
                 <h3>Grocery list</h3>
@@ -74,8 +80,8 @@ function App() {
             {
                 list.length > 0 && (
                     <div className="grocery-container">
-                        <List groceryItems={list} />
-                        <button className="clear-btn">Clear items</button>
+                        <List groceryItems={list} deleteItem={deleteItem} />
+                        <button className="clear-btn" onClick={clearList} >Clear items</button>
                     </div>
                 )
             }
