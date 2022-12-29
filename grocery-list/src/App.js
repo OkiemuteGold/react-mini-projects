@@ -7,75 +7,88 @@ function App() {
     const [list, setList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editID, setEditID] = useState(null);
-    const [alert, setAlert] = useState({ show: false, type: "", message: "" });
+    const [alert, setAlert] = useState({
+        show: false,
+        type: "",
+        message: ""
+    });
+
+    const showAlert = (show = false, type = "", message = "") => {
+        // in es6 if parameter and property used is same, you can simply use one. i.e show: show, or show,
+        setAlert({
+            show, type, message,
+        });
+    }
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.log("submitted");
 
         if (!name) {
-            setAlert({
-                show: true,
-                type: "danger",
-                message: "Please enter an item"
-            });
+            showAlert(true, "danger", "Please enter an item");
 
             setTimeout(() => {
-                setAlert({
-                    show: false,
-                })
+                showAlert(false);
             }, 2500);
         } else if (name && isEditing) {
             // handle edit
             setIsEditing(true);
         } else {
             const newItem = {
-                id: new Date().getTime().toString(),
+                id: "item" + new Date().getTime().toString(),
                 title: name,
-            }
+            };
 
             setList([...list, newItem]);
             setName("");
-            setAlert({
-                show: true,
-                type: "success",
-                message: newItem.title + " added to list"
-            });
+
+            showAlert(true, "success", newItem.title + " was added to your list");
 
             setTimeout(() => {
-                setAlert({
-                    show: false,
-                })
+                showAlert(false);
             }, 2500);
         }
     };
 
+    // const deleteItem = (itemId) => {
+    //     const newList = list.filter(item => {
+    //         return item.id !== itemId;
+    //     });
+
+    //     setList(newList);
+    // }
+
     return (
         <section className="section-center">
-            <div className="grocery-container">
-                <form className="grocery-form" onSubmit={submitForm}>
-                    {alert.show && <Alert />}
+            <form className="grocery-form" onSubmit={submitForm}>
+                {
+                    alert.show && <Alert {...alert} />
+                }
 
-                    <h3>Grocery list</h3>
+                <h3>Grocery list</h3>
 
-                    <div className="form-control">
-                        <input
-                            type="text"
-                            className="grocery-input"
-                            placeholder="e.g. eggs"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
+                <div className="form-control">
+                    <input
+                        type="text"
+                        className="grocery-input"
+                        placeholder="e.g. eggs"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
 
-                        <button type="submit" className="submit-btn">
-                            {isEditing ? "edit" : "submit"}
-                        </button>
+                    <button type="submit" className="submit-btn">
+                        {isEditing ? "edit" : "submit"}
+                    </button>
+                </div>
+            </form>
+
+            {
+                list.length > 0 && (
+                    <div className="grocery-container">
+                        <List groceryItems={list} />
+                        <button className="clear-btn">Clear items</button>
                     </div>
-                </form>
-
-                <List groceryItems={list} />
-                <button className="clear-btn">Clear items</button>
-            </div>
+                )
+            }
         </section>
     );
 }
