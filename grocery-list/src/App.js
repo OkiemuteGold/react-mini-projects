@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Alert from "./Alert";
 import List from "./List";
 import DeleteModal from "./DeleteModal";
 
+const getGroceryList = () => {
+    const list = localStorage.getItem("groceryList");
+    return list ? JSON.parse(list) : [];
+}
+
 function App() {
     const [name, setName] = useState("");
-    const [list, setList] = useState([]);
+    const [list, setList] = useState(getGroceryList());
     const [isEditing, setIsEditing] = useState(false);
     const [currentEditItem, setCurrentEditItem] = useState({
         id: null,
@@ -85,6 +90,7 @@ function App() {
         setName(specificItem.title);
     }
 
+    // ---- handle action to delete or clear list
     const handleModalAction = () => {
         if (isClearingList) {
             clearList();
@@ -106,6 +112,10 @@ function App() {
         setList([]);
         showAlert(true, "danger", "list emptied");
     }
+
+    useEffect(() => {
+        localStorage.setItem("groceryList", JSON.stringify(list));
+    }, [list])
 
     return (
         <section className="section-center">
