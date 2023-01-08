@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Alert from "./Alert";
 import List from "./List";
 import DeleteModal from "./DeleteModal";
@@ -17,6 +17,7 @@ function App() {
         message: ""
     });
     const [isModalShown, setIsModalShown] = useState(false);
+    const [isClearingList, setIsClearingList] = useState(false);
 
     // ---- function to show alert
     const showAlert = (show = false, type = "", message = "") => {
@@ -39,6 +40,7 @@ function App() {
     // ---- show modal and trap id and title of current item
     const showDeleteModal = (id, title) => {
         setCurrentEditItem({ id, title });
+        setIsClearingList(false);
         setIsModalShown(true);
     }
 
@@ -73,15 +75,6 @@ function App() {
         }
     };
 
-    // ---- delete item
-    const deleteItem = () => {
-        const newList = list.filter(item => item.id !== currentEditItem.id);
-        setList(newList);
-
-        closeDeleteModal();
-        showAlert(true, "success", currentEditItem.title + " removed from list");
-    }
-
     // ---- edit item
     const editItem = (id, title) => {
         // console.log(id, title);
@@ -90,6 +83,22 @@ function App() {
         setIsEditing(true);
         updateEditItem(id, title);
         setName(specificItem.title);
+    }
+
+    const handleModalAction = () => {
+        if (isClearingList) {
+            clearList();
+        } else {
+            deleteItem();
+        }
+        closeDeleteModal();
+    }
+
+    // ---- delete item
+    const deleteItem = () => {
+        const newList = list.filter(item => item.id !== currentEditItem.id);
+        setList(newList);
+        showAlert(true, "success", currentEditItem.title + " removed from list");
     }
 
     // ---- clear list
@@ -129,14 +138,21 @@ function App() {
                         showDeleteModal={showDeleteModal}
                         editItem={editItem}
                     />
-                    <button className="clear-btn" onClick={clearList}>
+                    <button
+                        className="clear-btn"
+                        onClick={() => {
+                            setIsClearingList(true);
+                            setIsModalShown(true);
+                        }}
+                    >
                         Clear items
                     </button>
 
                     {isModalShown && (
                         <DeleteModal
                             title={currentEditItem.title}
-                            deleteItem={deleteItem}
+                            handleModalAction={handleModalAction}
+                            isClearingList={isClearingList}
                             closeDeleteModal={closeDeleteModal}
                         />
                     )}
