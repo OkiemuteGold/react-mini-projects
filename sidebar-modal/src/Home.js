@@ -7,11 +7,11 @@ const Home = () => {
 
     return (
         <main>
-            <button className="sidebar-toggle">
+            <button className="sidebar-toggle" onClick={data.openSidebar}>
                 <FaBars />
             </button>
 
-            <button className="btn">show modal</button>
+            <button className="btn" onClick={data.openModal}>show modal</button>
         </main>
     );
 };

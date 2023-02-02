@@ -1,45 +1,51 @@
 import logo from "./logo.svg";
 import { FaTimes } from "react-icons/fa";
 import { social, links } from "./data";
+import { useGlobalContext } from './context'
 
 const Sidebar = () => {
-    return (
-        <aside className={`sidebar show-sidebar`}>
-            <div className="sidebar-header">
-                <img src={logo} alt="coding addict" className="logo" />
+    const { isSidebarOpen, closeSidebar } = useGlobalContext();
 
-                <button className="close-btn">
-                    <FaTimes />
-                </button>
-            </div>
+    if (isSidebarOpen) {
+        return (
+            <aside className={`sidebar show-sidebar`}>
+                <div className="sidebar-header">
+                    <img src={logo} alt="coding addict" className="logo" />
 
-            <ul className="links">
-                {links.map((link) => {
-                    const { id, url, text, icon } = link;
-                    return (
-                        <li key={id}>
-                            <a href={url}>
-                                {icon} {text}
-                            </a>
-                        </li>
-                    );
-                })}
-            </ul>
+                    <button className="close-btn" onClick={closeSidebar}>
+                        <FaTimes />
+                    </button>
+                </div>
 
-            <ul className="social-icons">
-                {social.map((link) => {
-                    const { id, url, icon } = link;
-                    return (
-                        <li key={id}>
-                            <a href={url}>
-                                {icon}
-                            </a>
-                        </li>
-                    );
-                })}
-            </ul>
-        </aside>
-    );
+                <ul className="links">
+                    {links.map((link) => {
+                        const { id, url, text, icon } = link;
+                        return (
+                            <li key={id}>
+                                <a href={url}>
+                                    {icon} {text}
+                                </a>
+                            </li>
+                        );
+                    })}
+                </ul>
+
+                <ul className="social-icons">
+                    {social.map((link) => {
+                        const { id, url, icon } = link;
+                        return (
+                            <li key={id}>
+                                <a href={url}>
+                                    {icon}
+                                </a>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </aside>
+        );
+    }
+
 };
 
 export default Sidebar;
