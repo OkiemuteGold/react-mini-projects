@@ -4,6 +4,7 @@ import sublinks from "./data";
 
 const Sidebar = () => {
     const { isSidebarOpen, closeSidebar } = useGlobalContext();
+
     return (
         <div
             className={`
@@ -14,6 +15,7 @@ const Sidebar = () => {
                 <button className="close-btn" onClick={closeSidebar}>
                     <FaTimes />
                 </button>
+
                 <div className="sidebar-links">
                     {sublinks.map((item, index) => {
                         const { links, page } = item;
