@@ -33,7 +33,7 @@ const Submenu = () => {
     return (
         <aside
             className={`
-                ${isSubmenuOpen ? "submenu show" : "submenu"}
+                ${links.length > 0 && isSubmenuOpen ? "submenu show" : "submenu"}
             `}
             ref={container}
         >

@@ -18,12 +18,17 @@ const Sidebar = () => {
 
                 <div className="sidebar-links">
                     {sublinks.map((item, index) => {
-                        const { links, page } = item;
+                        const { page, pageUrl, links } = item;
 
                         return (
                             <article key={index}>
-                                <h4>{page}</h4>
-                                <div className="sidebar-sublinks">
+                                <h4>
+                                    <a href={pageUrl} className='link-btn'>
+                                        {page}
+                                    </a>
+                                </h4>
+
+                                {links.length > 0 && <div className="sidebar-sublinks">
                                     {links.map((link, index) => {
                                         const { url, icon, label } = link;
 
@@ -34,7 +39,7 @@ const Sidebar = () => {
                                             </a>
                                         );
                                     })}
-                                </div>
+                                </div>}
                             </article>
                         );
                     })}
