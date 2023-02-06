@@ -13,11 +13,11 @@ const Submenu = () => {
 
     useEffect(() => {
         setColumns('col-2');
-        const submenu = container.current;
+        const submenuContainer = container.current;
         const { center, bottom } = location;
 
-        submenu.style.left = `${center}px`;
-        submenu.style.top = `${bottom}px`;
+        submenuContainer.style.left = `${center}px`;
+        submenuContainer.style.top = `${bottom}px`;
 
         // console.log(page, pageUrl, links, location);
 

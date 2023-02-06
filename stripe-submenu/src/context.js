@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import sublinks from "./data";
+import navLinks from "./data";
 
 const AppContext = React.createContext();
 
@@ -18,7 +18,7 @@ const AppProvider = ({ children }) => {
     };
 
     const openSubmenu = (text, coordinates) => {
-        const page = sublinks.find((link) => link.page === text);
+        const page = navLinks.find((link) => link.page === text);
         setPage(page);
         setLocation(coordinates);
         setIsSubmenuOpen(true);
