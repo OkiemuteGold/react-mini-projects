@@ -28,12 +28,28 @@ const AppProvider = ({ children }) => {
             type: "REMOVE_ITEM",
             itemId: id
         });
-    }
+    };
+
+    const increaseItem = (id) => {
+        dispatch({
+            type: "INCREASE_ITEM",
+            itemId: id
+        })
+    };
+
+    const decreaseItem = (id) => {
+        dispatch({
+            type: "DECREASE_ITEM",
+            itemId: id
+        })
+    };
 
     const contextValues = {
         ...state,
         clearCart,
         removeItem,
+        increaseItem,
+        decreaseItem
     };
 
     return (
