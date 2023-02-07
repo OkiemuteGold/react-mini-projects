@@ -3,17 +3,31 @@ const reducer = (state, action) => {
         return cartItem.id !== action.itemId;
     });
 
+    // const updateCart = state.cart.map(cartItem => {
+    //     if (cartItem.id === action.itemId) {
+    //         let amount;
+    //         if (action.type === "INCREASE_ITEM") {
+    //             amount = cartItem.amount + 1;
+    //         }
+    //         if (action.type === "DECREASE_ITEM") {
+    //             amount = cartItem.amount - 1;
+    //         }
+
+    //         return {
+    //             ...cartItem, amount: amount
+    //         };
+    //     }
+    //     return cartItem;
+    // });
+
     const increaseCart = state.cart.map(cartItem => {
         if (cartItem.id === action.itemId) {
             const amount = cartItem.amount + 1;
-            // state.total = amount * cartItem.price;
 
             return {
-                ...cartItem,
-                amount: amount
+                ...cartItem, amount: amount
             };
         }
-        // console.log(state.total);
         return cartItem;
     });
 
@@ -22,8 +36,7 @@ const reducer = (state, action) => {
             const amount = cartItem.amount - 1;
 
             return {
-                ...cartItem,
-                amount: amount
+                ...cartItem, amount: amount
             };
         }
         return cartItem;
@@ -54,7 +67,9 @@ const reducer = (state, action) => {
         case "DECREASE_ITEM":
             return {
                 ...state,
-                cart: decreaseCart,
+                cart: decreaseCart.filter(item => {
+                    return item.amount >= 1;
+                }),
             };
             break;
 
