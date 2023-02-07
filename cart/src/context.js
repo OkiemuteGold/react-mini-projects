@@ -1,5 +1,5 @@
-import { useState, useContext, useReducer, useEffect } from 'react'
-import cartItems from './data'
+import React, { useState, useContext, useReducer, useEffect } from 'react'
+import { cartItems } from './data'
 import reducer from './reducer';
 
 // ATTENTION!!!!!!!!!!
@@ -38,6 +38,6 @@ const AppProvider = ({ children }) => {
 // make sure use
 export const useGlobalContext = () => {
     return useContext(AppContext)
-}
+};
 
-export { AppProvider }
+export { AppProvider };
