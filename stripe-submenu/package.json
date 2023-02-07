@@ -1,5 +1,5 @@
 {
-  "name": "birthday-reminder",
+  "name": "stripe-menu",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
