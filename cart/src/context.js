@@ -23,9 +23,17 @@ const AppProvider = ({ children }) => {
         });
     };
 
+    const removeItem = (id) => {
+        dispatch({
+            type: "REMOVE_ITEM",
+            itemId: id
+        });
+    }
+
     const contextValues = {
         ...state,
         clearCart,
+        removeItem,
     };
 
     return (
