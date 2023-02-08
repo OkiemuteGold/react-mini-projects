@@ -3,15 +3,9 @@ const reducer = (state, action) => {
         return cartItem.id !== action.itemId;
     });
 
-    // const updatedCart = state.cart.map(cartItem => {
+    // const increaseCart = state.cart.map(cartItem => {
     //     if (cartItem.id === action.itemId) {
-    //         let amount;
-    //         if (action.type === "INCREASE_ITEM") {
-    //             amount = cartItem.amount + 1;
-    //         }
-    //         if (action.type === "DECREASE_ITEM") {
-    //             amount = cartItem.amount - 1;
-    //         }
+    //         const amount = cartItem.amount + 1;
 
     //         return {
     //             ...cartItem, amount: amount
@@ -20,20 +14,27 @@ const reducer = (state, action) => {
     //     return cartItem;
     // });
 
-    const increaseCart = state.cart.map(cartItem => {
-        if (cartItem.id === action.itemId) {
-            const amount = cartItem.amount + 1;
+    // const decreaseCart = state.cart.map(cartItem => {
+    //     if (cartItem.id === action.itemId) {
+    //         const amount = cartItem.amount - 1;
 
-            return {
-                ...cartItem, amount: amount
-            };
-        }
-        return cartItem;
-    });
+    //         return {
+    //             ...cartItem, amount: amount
+    //         };
+    //     }
+    //     return cartItem;
+    // });
 
-    const decreaseCart = state.cart.map(cartItem => {
+    const updateCartAmount = state.cart.map(cartItem => {
         if (cartItem.id === action.itemId) {
-            const amount = cartItem.amount - 1;
+            let amount;
+
+            if (action.type === "INCREASE_ITEM") {
+                amount = cartItem.amount + 1;
+            }
+            if (action.type === "DECREASE_ITEM") {
+                amount = cartItem.amount - 1;
+            }
 
             return {
                 ...cartItem, amount: amount
@@ -73,14 +74,14 @@ const reducer = (state, action) => {
         case "INCREASE_ITEM":
             return {
                 ...state,
-                cart: increaseCart,
+                cart: updateCartAmount,
             };
             break;
 
         case "DECREASE_ITEM":
             return {
                 ...state,
-                cart: decreaseCart.filter(item => {
+                cart: updateCartAmount.filter(item => {
                     return item.amount >= 1;
                 }),
             };
