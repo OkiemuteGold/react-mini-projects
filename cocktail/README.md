@@ -83,3 +83,33 @@ const Component = () => {
   return <FaHome className="icon"></FaHome>;
 };
 ```
+
+#### React Router Fix
+
+(Fix)[https://dev.to/dance2die/page-not-found-on-netlify-with-react-router-58mc]
+
+#### CRA Fix
+
+```
+
+"build": "CI= react-scripts build",
+
+```
+
+```sh
+npm install react-router-dom@6
+```
+
+In react-router-dom v6, "Switch" is replaced by routes "Routes". You need to update the import from
+
+import { Switch, Route } from "react-router-dom";
+
+to
+
+import { Routes, Route } from 'react-router-dom';
+
+https://stackoverflow.com/questions/63124161/attempted-import-error-switch-is-not-exported-from-react-router-dom
+
+https://reactrouter.com/en/6.8.1/start/overview
+
+.../tutorial

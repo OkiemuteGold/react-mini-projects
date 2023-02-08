@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useGlobalContext } from './context'
 
 // import pages
@@ -13,9 +13,16 @@ import Navbar from './components/Navbar'
 
 function App() {
     return (
-        <div>
-            <h2>app component</h2>
-        </div>
+        <Router>
+            <Navbar />
+
+            <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/about" element={<About />} />
+                <Route path="/cocktail/:id" element={<SingleCocktail />} />
+                <Route path="*" element={<Error />} />
+            </Routes>
+        </Router>
     )
 }
 
