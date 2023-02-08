@@ -44,12 +44,18 @@ const AppProvider = ({ children }) => {
         })
     };
 
+    useEffect(() => {
+        dispatch({
+            type: "GET_TOTAL",
+        });
+    }, [state.cart]);
+
     const contextValues = {
         ...state,
         clearCart,
         removeItem,
         increaseItem,
-        decreaseItem
+        decreaseItem,
     };
 
     return (
