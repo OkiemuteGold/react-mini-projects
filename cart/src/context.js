@@ -30,18 +30,19 @@ const AppProvider = ({ children }) => {
         });
     };
 
-    const increaseItem = (id) => {
-        dispatch({
-            type: "INCREASE_ITEM",
-            itemId: id
-        })
-    };
+    // const decreaseItem = (id) => {
+    //     dispatch({
+    //         type: "DECREASE_ITEM",
+    //         itemId: id
+    //     })
+    // };
 
-    const decreaseItem = (id) => {
+    const toggleAmount = (id, type) => {
         dispatch({
-            type: "DECREASE_ITEM",
-            itemId: id
-        })
+            type: "TOGGLE_AMOUNT",
+            payloadId: id,
+            payloadType: type
+        });
     };
 
     const fetchProducts = async () => {
@@ -73,8 +74,8 @@ const AppProvider = ({ children }) => {
         ...state,
         clearCart,
         removeItem,
-        increaseItem,
-        decreaseItem,
+        // decreaseItem,
+        toggleAmount
     };
 
     return (

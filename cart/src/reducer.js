@@ -3,17 +3,6 @@ const reducer = (state, action) => {
         return cartItem.id !== action.itemId;
     });
 
-    // const increaseCart = state.cart.map(cartItem => {
-    //     if (cartItem.id === action.itemId) {
-    //         const amount = cartItem.amount + 1;
-
-    //         return {
-    //             ...cartItem, amount: amount
-    //         };
-    //     }
-    //     return cartItem;
-    // });
-
     // const decreaseCart = state.cart.map(cartItem => {
     //     if (cartItem.id === action.itemId) {
     //         const amount = cartItem.amount - 1;
@@ -25,14 +14,14 @@ const reducer = (state, action) => {
     //     return cartItem;
     // });
 
-    const updateCartAmount = state.cart.map(cartItem => {
-        if (cartItem.id === action.itemId) {
+    const updatedCartItem = state.cart.map(cartItem => {
+        if (cartItem.id === action.payloadId) {
             let amount;
 
-            if (action.type === "INCREASE_ITEM") {
+            if (action.payloadType === "increase") {
                 amount = cartItem.amount + 1;
             }
-            if (action.type === "DECREASE_ITEM") {
+            if (action.payloadType === "decrease") {
                 amount = cartItem.amount - 1;
             }
 
@@ -71,17 +60,19 @@ const reducer = (state, action) => {
             };
             break;
 
-        case "INCREASE_ITEM":
-            return {
-                ...state,
-                cart: updateCartAmount,
-            };
-            break;
+        // case "DECREASE_ITEM":
+        //     return {
+        //         ...state,
+        //         cart: updateCartAmount.filter(item => {
+        //             return item.amount >= 1;
+        //         }),
+        //     };
+        //     break;
 
-        case "DECREASE_ITEM":
+        case "TOGGLE_AMOUNT":
             return {
                 ...state,
-                cart: updateCartAmount.filter(item => {
+                cart: updatedCartItem.filter(item => {
                     return item.amount >= 1;
                 }),
             };
