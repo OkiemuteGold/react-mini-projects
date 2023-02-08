@@ -44,11 +44,30 @@ const AppProvider = ({ children }) => {
         })
     };
 
+    const fetchProducts = async () => {
+        dispatch({
+            type: "LOADING",
+        });
+
+        const response = await fetch(url);
+        const cart = await response.json();
+        // console.log(cart);
+
+        dispatch({
+            type: "FETCH_PRODUCTS",
+            payload: cart
+        });
+    };
+
     useEffect(() => {
         dispatch({
             type: "GET_TOTAL",
         });
     }, [state.cart]);
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
     const contextValues = {
         ...state,

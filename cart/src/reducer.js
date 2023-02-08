@@ -94,6 +94,21 @@ const reducer = (state, action) => {
             };
             break;
 
+        case "LOADING":
+            return {
+                ...state,
+                loading: true,
+            };
+            break;
+
+        case "FETCH_PRODUCTS":
+            return {
+                ...state,
+                loading: false,
+                cart: action.payload
+            };
+            break;
+
         default:
             break;
     }
