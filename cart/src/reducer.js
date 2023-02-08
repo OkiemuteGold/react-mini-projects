@@ -105,7 +105,7 @@ const reducer = (state, action) => {
             break;
     }
 
-    return state;
+    throw new Error("No matching action type");
 };
 
 export default reducer;
