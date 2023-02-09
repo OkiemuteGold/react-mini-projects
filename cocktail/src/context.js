@@ -47,7 +47,7 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         fetchDrinks();
-    }, []);
+    }, [searchTerm]);
 
     const contextValues = {
         loading,

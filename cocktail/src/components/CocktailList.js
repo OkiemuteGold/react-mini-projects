@@ -5,7 +5,7 @@ import { useGlobalContext } from '../context'
 const CocktailList = () => {
     const { cocktails, loading, errorMessage } = useGlobalContext();
 
-    console.log(cocktails);
+    // console.log(cocktails);
 
     if (loading) {
         return <Loading />
