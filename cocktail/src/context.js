@@ -9,9 +9,9 @@ const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("a");
     const [cocktails, setCocktails] = useState([]);
-    const [errorMessage, setErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const fetchDrinks = async () => {
+    const fetchDrinks = useCallback(async () => {
         setLoading(true);
 
         try {
@@ -43,11 +43,11 @@ const AppProvider = ({ children }) => {
             setErrorMessage(error.message);
             setLoading(false);
         }
-    };
+    }, [searchTerm]);
 
     useEffect(() => {
         fetchDrinks();
-    }, [searchTerm]);
+    }, [searchTerm, fetchDrinks]);
 
     const contextValues = {
         loading,

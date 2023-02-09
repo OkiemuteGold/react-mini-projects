@@ -2,68 +2,67 @@ import React from "react"
 import Loading from '../components/Loading'
 import { useParams, Link } from 'react-router-dom'
 
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i='
-
 const SingleCocktail = () => {
     const { id } = useParams();
     const [loading, setLoading] = React.useState(false);
     const [cocktail, setCocktail] = React.useState(null);
 
-    const fetchSingleCocktail = async () => {
+    React.useEffect(() => {
         setLoading(true);
 
-        try {
-            const response = await fetch(url + id);
-            const data = await response.json();
+        async function getCocktail() {
+            try {
+                const response = await fetch(
+                    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+                );
+                const data = await response.json();
 
-            if (data.drinks) {
-                const {
-                    strDrink: name,
-                    strDrinkThumb: image,
-                    strAlcoholic: info,
-                    strCategory: category,
-                    strGlass: glass,
-                    strInstructions: instructions,
-                    strIngredient1: ingredient1,
-                    strIngredient2: ingredient2,
-                    strIngredient3: ingredient3,
-                    strIngredient4: ingredient4,
-                    strIngredient5: ingredient5,
-                } = data.drinks[0];
+                if (data.drinks) {
+                    const {
+                        strDrink: name,
+                        strDrinkThumb: image,
+                        strAlcoholic: info,
+                        strCategory: category,
+                        strGlass: glass,
+                        strInstructions: instructions,
+                        strIngredient1,
+                        strIngredient2,
+                        strIngredient3,
+                        strIngredient4,
+                        strIngredient5,
+                    } = data.drinks[0];
 
-                const ingredients = [
-                    ingredient1,
-                    ingredient2,
-                    ingredient3,
-                    ingredient4,
-                    ingredient5,
-                ];
+                    const ingredients = [
+                        strIngredient1,
+                        strIngredient2,
+                        strIngredient3,
+                        strIngredient4,
+                        strIngredient5,
+                    ];
 
-                const newSingleCocktail = {
-                    name,
-                    image,
-                    info,
-                    category,
-                    glass,
-                    instructions,
-                    ingredients,
-                };
+                    const newCocktail = {
+                        name,
+                        image,
+                        info,
+                        category,
+                        glass,
+                        instructions,
+                        ingredients,
+                    };
 
-                setCocktail(newSingleCocktail);
-            } else {
-                setCocktail(null);
+                    setCocktail(newCocktail);
+                } else {
+                    setCocktail(null);
+                }
+
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setLoading(false)
             }
-
-            // console.log(data);
-            setLoading(false);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
         }
-    };
 
-    React.useEffect(() => {
-        fetchSingleCocktail();
+        getCocktail();
     }, [id]);
 
     if (loading) {
