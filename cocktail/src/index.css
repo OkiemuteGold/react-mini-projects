@@ -338,6 +338,23 @@ Cocktail
 .drink-info {
   padding-top: 2rem;
 }
+
+.ingredients {
+  position: relative;
+}
+
+.ingredients:not(:last-child):after {
+  content: ",";
+  position: absolute;
+  right: -4px;
+}
+
+.ingredients:last-child:after {
+  content: ".";
+  position: absolute;
+  right: -4px;
+}
+
 @media screen and (min-width: 992px) {
   .drink {
     display: grid;
