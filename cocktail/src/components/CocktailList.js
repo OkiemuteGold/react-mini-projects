@@ -3,25 +3,29 @@ import Loading from './Loading'
 import { useGlobalContext } from '../context'
 
 const CocktailList = () => {
-    // const { cocktails, loading } = useGlobalContext()
+    const { cocktails, loading, errorMessage } = useGlobalContext();
 
-    return (
-        <div>
-            <h2>cocktail list component</h2>
-        </div>
-    )
+    console.log(cocktails);
 
-    // if (loading) {
-    //     return <Loading />
-    // }
+    if (loading) {
+        return <Loading />
+    }
 
-    // if (cocktails.length < 1) {
-    //     return (
-    //         <h2 className='section-title'>
-    //             no cocktails matched your search criteria
-    //         </h2>
-    //     )
-    // }
+    if (errorMessage) {
+        return (
+            <h2 className='section-title'>
+                {errorMessage}
+            </h2>
+        )
+    }
+
+    if (cocktails.length < 1) {
+        return (
+            <h2 className='section-title'>
+                No cocktails matched your search criteria
+            </h2>
+        )
+    }
     //   return (
     //     <section className='section'>
     //       <h2 className='section-title'>cocktails</h2>
